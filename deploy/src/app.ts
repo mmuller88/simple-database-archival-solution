@@ -34,15 +34,15 @@ const region =
     process.env.CDK_DEFAULT_REGION;
 
 // Deploy Waf for CloudFront in us-east-1
-const cfWafStackName = stackName + "-waf";
+// const cfWafStackName = stackName + "-waf";
 
-const cfWafStack = new CfWafStack(app, cfWafStackName, {
-    env: {
-        account: account,
-        region: "us-east-1",
-    },
-    stackName: cfWafStackName,
-});
+// const cfWafStack = new CfWafStack(app, cfWafStackName, {
+//     env: {
+//         account: account,
+//         region: "us-east-1",
+//     },
+//     stackName: cfWafStackName,
+// });
 
 // Deploy App Stack
 const appStack = new AppStack(app, stackName, {
@@ -51,15 +51,15 @@ const appStack = new AppStack(app, stackName, {
         region: region,
     },
     stackName: stackName,
-    ssmWafArnParameterName: cfWafStack.ssmWafArnParameterName,
-    ssmWafArnParameterRegion: cfWafStack.region,
+    // ssmWafArnParameterName: cfWafStack.ssmWafArnParameterName,
+    // ssmWafArnParameterRegion: cfWafStack.region,
 });
 
-appStack.addDependency(cfWafStack);
+// appStack.addDependency(cfWafStack);
 
 // Add Aws Solutions Checks and suppress rules
 cdk.Aspects.of(app).add(new AwsSolutionsChecks({ logIgnores: true }));
-suppressCdkNagRules(cfWafStack);
+// suppressCdkNagRules(cfWafStack);
 suppressCdkNagRules(appStack);
 
 app.synth();

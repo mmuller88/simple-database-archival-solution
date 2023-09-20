@@ -38,8 +38,8 @@ import { S3BucketConstruct } from "./constructs/s3-bucket-construct";
 import { DasApiPythonConstruct } from "./constructs/das-api-python-construct";
 
 export interface AppStackProps extends cdk.StackProps {
-    readonly ssmWafArnParameterName: string;
-    readonly ssmWafArnParameterRegion: string;
+    // readonly ssmWafArnParameterName: string;
+    // readonly ssmWafArnParameterRegion: string;
 }
 
 /**
@@ -179,18 +179,18 @@ export class AppStack extends cdk.Stack {
          * CREATE SDAS VPC
          */
 
-        const cfWafWebAcl = new SsmParameterReaderConstruct(
-            this,
-            "SsmWafParameter",
-            {
-                ssmParameterName: props.ssmWafArnParameterName,
-                ssmParameterRegion: props.ssmWafArnParameterRegion,
-            }
-        ).getValue();
+        // const cfWafWebAcl = new SsmParameterReaderConstruct(
+        //     this,
+        //     "SsmWafParameter",
+        //     {
+        //         ssmParameterName: props.ssmWafArnParameterName,
+        //         ssmParameterRegion: props.ssmWafArnParameterRegion,
+        //     }
+        // ).getValue();
 
         const website = new CloudFrontS3WebSiteConstruct(this, "WebApp", {
             webSiteBuildPath: webAppBuildPath,
-            webAclArn: cfWafWebAcl,
+            // webAclArn: cfWafWebAcl,
         });
 
         const api = new ApiGatewayV2CloudFrontConstruct(this, "Api", {

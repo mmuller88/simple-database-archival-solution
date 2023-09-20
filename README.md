@@ -80,6 +80,7 @@ To deploy run the following command.
 # for signing in will be sent to that address.
 # Execute this command from the root of the cloned repository.
 # It will take approximately 10 mins for the stack to be deployed.
+export AWS_REGION=us-east-1
 npm run deploy -- -c admin_email="${YOUR_ADMINISTRATOR_EMAIL}"
 ```
 
